@@ -24,13 +24,9 @@ Check out the [stress test/review](https://jlopp.github.io/metal-bitcoin-storage
 * Marker pen
 
 ### Instructions:
-1. Download files to a folder:
-    * WasherStampJig.scad
-    * text_on.scad
-    * text_on_cylinder.scad
-1. Customize and generate the model in OpenSCAD:
+1. Customize and generate the 3D template:
     1. Install [OpenSCAD](https://openscad.org/) software 
-    1. Open WasherStampJig.scad
+    1. Download and open the WasherStampJig.scad file
     1. Measure your washers and stamps
     1. Adjust the parameters to your needs – washer and stamp sizes, etc.
     1. Render the objects, generate STL file and print it in 3D
