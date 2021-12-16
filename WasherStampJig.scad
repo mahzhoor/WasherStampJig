@@ -24,29 +24,32 @@ See https://github.com/brodykenrick/text_on_OpenSCAD for details
 
 // Edit these parameters to customize the templates
 
-// How many letters should fit on one washer? The more letters, the smaller angle between them.
+/* Layout */
+
+/* How many letters should fit on one washer? The more letters, the smaller angle between them. */
 letters = 15;
 
-// How many stencils should the letters be divided into? Adjust it so that the letter holes do not overlap.
+/* How many stencils should the letters be divided into? Adjust it so that the letter holes do not overlap. */
 stencils = 3;
 
-// How many copies do you plan to stamp at the same time? Each base holds one washer
+/* How many copies do you plan to stamp at the same time? Each base holds one washer */
 bases = 2;
 
-// Small gap between elements. If the stencil wiggle too much in the base - decrease. If it doesn't fit – increase.
+/* Small gap between elements. If the stencil wiggle too much in the base - decrease. If it doesn't fit – increase. */
 epsilon = 0.2;
 
-// Your metal stamp dimensions
+/* Your metal stamps dimensions */
 stamp_width = 6.25;
 stamp_depth = 6.25;
 stamp_height = 20;
 
-// Your washers dimensions
+/* Your washer dimensions */
 washer_inner = 8.5;
 washer_outer = 23.85;
 washer_thickness = 1.5;
 
-// Additional parameters – you probably don't need to change them
+/* Additional parameters */
+// You probably don't need to change them
 
 wall_thickness = 2;
 holder_height_ratio = 0.45;
@@ -54,7 +57,8 @@ font_size = 4;
 marker_thickness = 4;
 
 // End of parameters
-module end_of_parameters() {} // Customizer hack
+
+/* [Hidden] */
 
 angle = 360/letters;
 r = (washer_inner-epsilon)/2+((washer_outer+epsilon-washer_inner-epsilon)/2-(stamp_depth+epsilon))/2; // inner line r for stamp
@@ -72,7 +76,7 @@ font_adj = (font_size / (2*3.1416*(box_size/2)) * 360)/4;
 for (k = [0:stencils-1]) {
     translate([k*box_size*1.5,0,0]) {
         translate(displacement)
-//        rotate([0,180,0]) translate([0,0,-stamp_height]) // flip
+        rotate([0,180,0]) translate([0,0,-stamp_height]) // flip
         difference() {
             union() {
                 cylinder(h=stamp_height,r=box_size/2); // main body
@@ -815,89 +819,4 @@ module text_extrude( t = default_t,
             valign = valign,
             language = language,
             script = script);
-}
-
-
-
-// text_on_cylinder.scad
-
-use <text_on/text_on.scad>
-
-
-//A cylinder with unequal top and bottom radii (a truncated cone)
-rad1=10;
-rad2=30;
-translate([0,100,-25])
-{
-%cylinder(r1=rad1, r2=rad2,h=40);
-
-text_on_cylinder("eastwest=-120",[0,0,0],r1=rad1,r2=rad2,h=40, eastwest=-120);
-
-text_on_cylinder("rotate=90",[0,0,0],r1=rad1,r2=rad2,h=40,rotate=90,updown=15);
-text_on_cylinder("rotate = 30, east = 90",[0,0,0],r1=rad1,r2=rad2,h=40,spacing=1.2,rotate=30,eastwest=90,updown=15);
-
-text_on_cylinder("face = top",[0,0,0],r1=rad1,r2=rad2,h=40,face="top");
-text_on_cylinder("face = bottom",[0,0,0],r1=rad1,r2=rad2,h=40,face="bottom");
-
-}
-
-//The reverse slanty cylinder of the above
-translate([-75,100,-25])
-{
-%cylinder(r1=rad2, r2=rad1,h=40);
-text_on_cylinder("eastwest=-120",[0,0,0],r1=rad2,r2=rad1,h=40, eastwest=-120);
-
-#text_on_cylinder("ttb",[0,0,0],r1=rad2,r2=rad1,h=40, direction="ttb",eastwest=-45);
-#text_on_cylinder("btt",[0,0,0],r1=rad2,r2=rad1,h=40, direction="btt",eastwest=-60);
-#text_on_cylinder("rtl",[0,0,0],r1=rad2,r2=rad1,h=40, direction="rtl",eastwest=-75,updown=-10);
-
-text_on_cylinder("rotate=90",[0,0,0],r1=rad2,r2=rad1,h=40,rotate=90,updown=15);
-text_on_cylinder("rotate = 30, east = 90",[0,0,0],r1=rad2,r2=rad1,h=40,spacing=1.2,rotate=30,eastwest=90);
-}
-
-
-//A normal cylinder
-translate([0,0,-20])
-{
-%cylinder(r=20,h=40, center=false);
-
-text_on_cylinder(t="rotate=90",locn_vec=[0,0,0],r=20,r1=undef,r2=undef,h=40,rotate=90);
-
-text_on_cylinder(t="TTB",locn_vec=[0,0,0],r=20,h=40,eastwest=-60,direction="ttb");
-
-text_on_cylinder(t="BTT",locn_vec=[0,0,0],r=20,h=40,eastwest=-75,direction="btt");
-
-text_on_cylinder(t="RTL",locn_vec=[0,0,0],r=20,h=40,eastwest=-105,direction="rtl",updown=10);
-
-text_on_cylinder("rotate = 30, east = 90",[0,0,0],r=20,h=40,spacing=1.2,rotate=30,eastwest=90);
-
-text_on_cylinder("ccw = true",[0,0,0],r=20,h=40,face="top",ccw=true);
-
-text_on_cylinder("middle = 8",[0,0,0],r=20,h=40,size=3,face="top",middle=8);
-
-text_on_cylinder("face = top",[0,0,0],r=20,h=40,face="top");
-
-text_on_cylinder("face = top, center",[0,0,0],r=20,h=40,face="top",center=true);
-
-text_on_cylinder("eastwest=90",[0,0,0],r=20,h=40,size=3,face="top",eastwest=90);
-
-text_on_cylinder("eastwest=-90",[0,0,0],r=20,h=40,size=3,face="top",ccw=true,eastwest=-90);
-
-text_on_cylinder("face = bottom",[0,0,0],r=20,h=40,face="bottom"); 
-
-text_on_cylinder(t="😁😇😈😎",locn_vec=[0,0,0],r=20,h=40,rotate=90,eastwest=-45,font="DejaVuSansCondensed", spacing=3.5);
-
-}
-
-
-//A centered cylinder
-translate([-75,-75,0])
-{
-%cylinder(r=20,h=40, center=true);
-
-%text_on_cylinder("face = bottom, cyl_center",[0,0,0],r=20,h=40,face="bottom",cylinder_center=true);
-%text_on_cylinder("rotate = 30, east = 90, cyl_center",[0,0,0],r=20,h=40,spacing=1.2,rotate=30,eastwest=90,cylinder_center=true);
-
-%text_on_cylinder("cyl_center",[0,0,0],r=20,h=40,spacing=1.2,cylinder_center=true);
-
 }
