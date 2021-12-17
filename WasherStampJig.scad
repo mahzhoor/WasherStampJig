@@ -15,7 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-â€”
+—
 
 The following code requires text_on_OpenSCAD library (by Brody Kenrick) which is licensed LGPLv2.1.
 See https://github.com/brodykenrick/text_on_OpenSCAD for details
@@ -35,7 +35,7 @@ stencils = 3;
 /* How many copies do you plan to stamp at the same time? Each base holds one washer */
 bases = 2;
 
-/* Small gap between elements. If the stencil wiggle too much in the base - decrease. If it doesn't fit â€“ increase. */
+/* Small gap between elements. If the stencil wiggle too much in the base - decrease. If it doesn't fit – increase. */
 epsilon = 0.2;
 
 /* Your metal stamps dimensions */
@@ -140,7 +140,7 @@ module holes(width, depth, height, r, letters_count, stencil_nb, stencils) {
                
             }
             //Number
-            text_on_cylinder(str(i+1),font="LiberationMono:style=Bold",size=font_size,locn_vec=[0,0,height-font_size/2-wall_thickness/2],r=box_size/2,h=height,spacing=0.85,cylinder_center=true,eastwest=(-angle*i)-180+font_adj,extrusion_height=wall_thickness);
+            text_on_cylinder(str(i+1),font="RobotoMono:style=Bold",size=font_size,locn_vec=[0,0,height-font_size/2-wall_thickness/2],r=box_size/2,h=height,spacing=0.85,cylinder_center=true,eastwest=(-angle*i)-180+font_adj,extrusion_height=wall_thickness);
             
         }
     }
