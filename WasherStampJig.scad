@@ -15,12 +15,14 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-—
+-
 
 The following code requires text_on_OpenSCAD library (by Brody Kenrick) which is licensed LGPLv2.1.
 See https://github.com/brodykenrick/text_on_OpenSCAD for details
 
 */
+
+// v. 1.1
 
 // Edit these parameters to customize the templates
 
@@ -35,8 +37,8 @@ stencils = 3;
 /* How many copies do you plan to stamp at the same time? Each base holds one washer */
 bases = 2;
 
-/* Small gap between elements. If the stencil wiggle too much in the base - decrease. If it doesn't fit – increase. */
-epsilon = 0.2;
+/* Small gap between elements. If the stencil wiggle too much in the base - decrease. If it doesn't fit ï¿½ increase. */
+epsilon = 0.1;
 
 /* Your metal stamps dimensions */
 stamp_width = 6.25;
@@ -80,7 +82,7 @@ for (k = [0:stencils-1]) {
         difference() {
             union() {
                 cylinder(h=stamp_height,r=box_size/2); // main body
-                rounded_inset(0);
+                translate([0,0,-washer_thickness]) rounded_inset(0);
             }
             holes(stamp_width, stamp_depth, stamp_height, r, letters, k+1, stencils); // holes
         }
@@ -104,8 +106,6 @@ for (m = [0:bases-1]) {
     } // difference
 } // for
 
-
-
 module rounded_inset(eps) {
     //eps is additional epsilon for spacing of the hole
     translate([0,3*epsilon,0])
@@ -116,7 +116,7 @@ module rounded_inset(eps) {
         }
         translate([0,-box_size/2+wall_thickness/2+epsilon/4,stamp_height*holder_height_ratio-eps])
         rotate([90,0,0])
-        cylinder(h=2*wall_thickness+eps,r=2*wall_thickness+eps);                
+        cylinder(h=2*wall_thickness+eps,r=2.5*wall_thickness+eps);                
     }
 }
 
@@ -146,7 +146,6 @@ module holes(width, depth, height, r, letters_count, stencil_nb, stencils) {
     }
 
 }
-
 
 
 // The following code is part of the text_on_OpenSCAD library (by Brody Kenrick) which is licensed LGPLv2.1.

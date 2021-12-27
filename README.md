@@ -1,6 +1,8 @@
 # WasherStampJig
 DYI Printable 3D Template for Stamping Metal Washers - Cheap and secure Cold Storage for backing up your passwords and cryptocurrency seeds
 
+v. 1.1
+
 ## The idea
 
 To backup your sensitive data – stamp them on metal washers.  
